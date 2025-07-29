@@ -4,11 +4,15 @@ version: 0.1.3
 homepage: https://github.com/polarby/render
 
 environment:
-  sdk: '>=2.18.6 <3.0.0'
-  flutter: '>=3.7.0-1.4.pre'
+  sdk: ">=2.18.6 <3.0.0"
+  flutter: ">=3.7.0-1.4.pre"
 
 dependencies:
-  ffmpeg_kit_flutter_min_gpl: ^6.0.3
+  # ffmpeg_kit_flutter_min_gpl: ^6.0.3
+  ffmpeg_kit_flutter_min_gpl:
+    git:
+      url: https://github.com/freshcutgg/ffmpeg_kit_flutter_min_gpl.git
+      ref: 9d1462822c9c920b6764b89fb34389761a07cc02
   provider: ^6.0.5
   flutter:
     sdk: flutter
@@ -26,7 +30,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
 # To add assets to your package, add an assets section, like this:
 # assets:
 #   - images/a_dot_burr.jpeg
