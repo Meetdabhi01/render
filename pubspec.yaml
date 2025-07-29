@@ -13,6 +13,7 @@ dependencies:
     git:
       url: https://github.com/meetdabhioceanmtech/ffmpeg-kit.git
       path: flutter/flutter
+      ref: d32ba734fae0050c34038752c8661c3a44d6489f
   provider: ^6.0.5
   flutter:
     sdk: flutter
