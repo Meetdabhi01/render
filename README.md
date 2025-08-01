@@ -10,7 +10,7 @@
 <a href="https://github.com/polarby/render/network"><img src="https://img.shields.io/github/forks/polarby/render" alt="GitHub stars"></a>
 </p>
 
-----
+---
 
 # Render
 
@@ -22,31 +22,31 @@ Main features include:
 - Record rendering **moving** widgets to export formats
 - Rendering widgets that are not in your widget tree (not displayed/build)
 
-*All features support (if supported by format):* Transparency & sound
+_All features support (if supported by format):_ Transparency & sound
 
 Not sure about `Render`? Check out the comparison to `screenshot`
 and `screen_recorder`[here](#-the-comparison-to-other-packages).
 
--------
+---
 
 <img src="https://user-images.githubusercontent.com/52090518/214943744-7785bb9f-ef86-42fe-9682-c4088dd73af7.gif" width="25%" height="25%"/>
 
 **Table of Contents**
 
 - [🚀 Getting started](#-getting-started)
-    - [Installing](#installing)
-    - [Quick start](#quick-start)
-    - [Usage](#usage)
-        - [Image rendering](#image-rendering)
-        - [Motion rendering](#motion-rendering)
-        - [Recording motion](#recording-motion)
-        - [Out of context](#out-of-context)
-        - [Handling stream & information flow](#handling-stream--information-flow)
+  - [Installing](#installing)
+  - [Quick start](#quick-start)
+  - [Usage](#usage)
+    - [Image rendering](#image-rendering)
+    - [Motion rendering](#motion-rendering)
+    - [Recording motion](#recording-motion)
+    - [Out of context](#out-of-context)
+    - [Handling stream & information flow](#handling-stream--information-flow)
 - [🔩 Compatibility](#-compatibility)
-    - [Limitations and Performance](#limitations-and-performance)
-    - [Supported Platforms](#supported-platforms)
-    - [Exportable Formats](#exportable-formats)
-        - [Custom formats](#custom-formats)
+  - [Limitations and Performance](#limitations-and-performance)
+  - [Supported Platforms](#supported-platforms)
+  - [Exportable Formats](#exportable-formats)
+    - [Custom formats](#custom-formats)
 - [📁 Class documentation](#-class-documentation)
 - [❔ The comparison to other packages](#-the-comparison-to-other-packages)
 - [🔧 Under the hood](#-under-the-hood)
@@ -93,7 +93,8 @@ Note that the render widget cannot change its size during capturing as dynamic d
 files are universally not supported by main formats. Wrapping your widget in an expandable widget,
 therefore may throw an error.
 
-[comment]: # (@formatter:off)
+[comment]: # "@formatter:off"
+
 ```dart
 import 'package:render/render.dart';
 
@@ -107,7 +108,8 @@ Render(
 final result = await controller.captureMotion(Duration(seconds: 4));
 await controller.captureImage(format: ImageFormat.png, settings:  ImageSettings(pixelRatio: 3),);
 ```
-[comment]: # (@formatter:on)
+
+[comment]: # "@formatter:on"
 
 Tip: full interactive example for usage in `./example` folder.
 
@@ -128,7 +130,8 @@ There are 4 methods you can call to capture an image:
 - `captureImageFromWidgetWithStream(Widget widget)` to render a invisible provided widget with a
   notification stream.
 
-[comment]: # (@formatter:off)
+[comment]: # "@formatter:off"
+
 ```dart
 final imageResult = await renderController.captureImage(
      format: ImageFormat.png,
@@ -137,7 +140,8 @@ final imageResult = await renderController.captureImage(
 
 Image.file(imageResult.output); // show result as image
 ```
-[comment]: # (@formatter:on)
+
+[comment]: # "@formatter:on"
 
 Look up [Handle Streams](#handling-stream--information-flow) to get to know how to render images
 with a notification streams.
@@ -153,7 +157,8 @@ There are 4 methods you can call to capture motion of a widget:
 - `captureMotionFromWidgetWithStream(Widget widget)` to render a invisible provided widget with a
   notification stream.
 
-[comment]: # (@formatter:off)
+[comment]: # "@formatter:off"
+
 ```dart
 final result = await renderController.captureMotionWithStream(
      functionController.duration,
@@ -167,7 +172,8 @@ await controller.play();
 
 VideoPlayer(snapshot.data!); // show result as video
 ```
-[comment]: # (@formatter:on)
+
+[comment]: # "@formatter:on"
 
 **Audio:**
 
@@ -176,7 +182,8 @@ of a flutter app or specific widgets, therefore the only feasible way for now is
 file. To do this you can pass multiple audio files (from eg. video, url, music, etc) to the target
 format:
 
-[comment]: # (@formatter:off)
+[comment]: # "@formatter:off"
+
 ```dart
 controller.captureMotion(
     ...
@@ -186,7 +193,8 @@ controller.captureMotion(
     ]),
 );
 ```
-[comment]: # (@formatter:on)
+
+[comment]: # "@formatter:on"
 
 Depending on the rendering settings, motion rendering can take quite long, so it is highly
 recommended to use methods with stream return, to notify the user about the progress of rendering.
@@ -201,7 +209,8 @@ functions returns a `MotionRecorder` to `stop()`and access the stream of the act
 - `recordMotion()` to record the child of `Render` widget, which is in your widget tree.
 - `recordMotionFromWidget(Widget widget)` to record a invisible provided widget.
 
-[comment]: # (@formatter:off)
+[comment]: # "@formatter:off"
+
 ```dart
 final recorder = renderController.recordMotion(
        functionController.duration,
@@ -213,7 +222,8 @@ await Future.delayed(Duration(seconds: 5));
 
 final result = await recorder.stop(); // result can then be displayed (see Motion rendering)
 ```
-[comment]: # (@formatter:on)
+
+[comment]: # "@formatter:on"
 
 Depending on the rendering settings, motion rendering can take quite long, so it is highly
 recommended to use methods with stream return, to notify the user about the progress of rendering.
@@ -228,7 +238,8 @@ Simply pass the widget that needs to be rendered in the function.
 Note that rendering out of context will still build and render each frame of the widget. It will not
 reduce processing time in any way.
 
-[comment]: # (@formatter:off)
+[comment]: # "@formatter:off"
+
 ```dart
 final imageResult = await renderController.captureImageFromWidget(
     Container(), // The widget to be rendered
@@ -238,11 +249,12 @@ final imageResult = await renderController.captureImageFromWidget(
 
 Image.file(imageResult.output); // show result as image
 ```
-[comment]: # (@formatter:on)
+
+[comment]: # "@formatter:on"
 
 **Known Confusions:**
 
-- *Sound during capturing*: When capturing motions with sound out of context, it will still play the
+- _Sound during capturing_: When capturing motions with sound out of context, it will still play the
   sound in the application. To conquer this, please remove the playing sound of your video widget
   and pass the sound to the audio input of the format.
 
@@ -251,7 +263,8 @@ Image.file(imageResult.output); // show result as image
 Using information stream is highly recommended for rendering motion, due to longer loading phases.
 The following example shows how to handle streams of a rendering process:
 
-[comment]: # (@formatter:off)
+[comment]: # "@formatter:off"
+
 ```dart
 final stream = renderController.captureMotionWithStream( // start capturing with stream
     functionController.duration,
@@ -271,7 +284,8 @@ stream.listen((event) { // listens to stream until it closes by itself (when res
 // result can then be displayed (see Motion rendering)
 final result = await stream.firstWhere((event) => event.isResult || event.isFatalError);
 ```
-[comment]: # (@formatter:on)
+
+[comment]: # "@formatter:on"
 
 ## 🔩 Compatibility
 
@@ -311,11 +325,11 @@ To get a good sweet spot you can follow the following introduction for your spec
 
 ### Supported Platforms
 
-|             |  Android  |  iOS   | Web  | macOS  |   Windows   |  Linux   |
-|:------------|:---------:|:------:|:----:|:------:|:-----------:|:--------:|
-| **Support** |  SDK 16+  |  9.0+  | Any  | 10.11+ | Windows 10+ |   any    |
-| Motion      |    ✔️     |   ✔️   | ❌️️  |   ✔️   |  Untested   | Untested |
-| Image       |    ✔️     |   ✔️   | ❌️️️ |   ✔️   |  Untested   | Untested |
+|             | Android | iOS  |  Web  | macOS  |   Windows   |  Linux   |
+| :---------- | :-----: | :--: | :---: | :----: | :---------: | :------: |
+| **Support** | SDK 16+ | 9.0+ |  Any  | 10.11+ | Windows 10+ |   any    |
+| Motion      |   ✔️    |  ✔️  | ❌️️  |   ✔️   |  Untested   | Untested |
+| Image       |   ✔️    |  ✔️  | ❌️️️ |   ✔️   |  Untested   | Untested |
 
 There currently [no support for web](https://github.com/polarby/render/issues/6), as file writing is
 an issue. Windows version might require a simple rewrite of processing structure, but i do not have
@@ -329,12 +343,12 @@ and [Image](https://api.flutter.dev/flutter/widgets/Image-class.html) visualizer
 default video player does not support transparency.
 
 | Motion Formats | .mp4 | .mov | .gif | .webp | .apng | .mpeg | .mkv | .hls | .dash | .raw | .qtff |
-|:-------------:|:---:|:---:|:--:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| Support | ✔️ | ✔️ | ✔️ | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] | [ ] |[ ] |
+| :------------: | :--: | :--: | :--: | :---: | :---: | :---: | :--: | :--: | :---: | :--: | :---: |
+|    Support     |  ✔️  |  ✔️  |  ✔️  |  [ ]  |  [ ]  |  [ ]  | [ ]  | [ ]  |  [ ]  | [ ]  |  [ ]  |
 
 | Image Formats | .jpg | .png | .bmp | .tiff | .tga | .pvr | .ico | .psd | .exr |
-|:-------------:|:---:|:---:|:--:|:---:|:---:|:---:|:---:|:---:|:---:|
-| Support | ✔️ | ✔️ | ✔️ | ✔️ | [ ] | [ ] | [ ] | [ ] | [ ] |
+| :-----------: | :--: | :--: | :--: | :---: | :--: | :--: | :--: | :--: | :--: |
+|    Support    |  ✔️  |  ✔️  |  ✔️  |  ✔️   | [ ]  | [ ]  | [ ]  | [ ]  | [ ]  |
 
 #### Custom Formats
 
@@ -342,7 +356,8 @@ In case you want to export your rendering as a custom format, that is currently 
 this plugin, but supported by FFmpeg conversion, you can follow the instructions below to extend
 the format class:
 
-[comment]: # (@formatter:off)
+[comment]: # "@formatter:off"
+
 ```dart
 class YourFormat extends MotionFormat { // you can either extend MotionFormat or ImageFormat
   final dynamic formatSpecificSetting;
@@ -371,7 +386,7 @@ class YourFormat extends MotionFormat { // you can either extend MotionFormat or
       {required String inputPath,
       required String outputPath,
       required double frameRate}) {
-    //return an FFmpegRenderOperation that takes care of all settings 
+    //return an FFmpegRenderOperation that takes care of all settings
     return super.processor(
       inputPath: inputPath,
       outputPath: outputPath,
@@ -380,15 +395,18 @@ class YourFormat extends MotionFormat { // you can either extend MotionFormat or
   }
 }
 ```
-[comment]: # (@formatter:on)
+
+[comment]: # "@formatter:on"
 
 After creating your format you can simply use it as format in `Render` methods:
 
-[comment]: # (@formatter:off)
+[comment]: # "@formatter:off"
+
 ```dart
 controller.captureImage(format: YourFormat());
 ```
-[comment]: # (@formatter:on)
+
+[comment]: # "@formatter:on"
 
 If you think your format can be of use for other, please submit it as a new issue or pull request
 and we can merge it for public use.
@@ -411,7 +429,7 @@ classDiagram
     note for RenderController "Additinonal Parameters:\n-RenderFormat format\n-LogLevel logLevel\nMotion:\n-Duration duration"
 
 
-    
+
     class Render{
         -Widget child
         -RenderController controller
@@ -442,19 +460,19 @@ classDiagram
 
 ## ❔ The comparison to other packages
 
-|                                             |     `Render`      | [screen_recorder](https://pub.dev/packages/screen_recorder) | [screenshot](https://pub.dev/packages/screenshot) | 
-|:-------------------------------------------:|:-----------------:|:-----------------------------------------------------------:|:-------------------------------------------------:|
-|                Capture image                |        ✔️         |                              ❌                              |                        ✔️                         | 
-|               Capture motion                |        ✔️         |                              ❌                              |                        ❌️️                        | 
-|                Record motion                |        ✔️         |                             ✔️                              |                       ❌️️️                        | 
-|                Format export                | Standard + custom |                        Only to bytes                        |                   Only to bytes                   | 
-|                    Audio                    |        ✔️         |                              ❌                              |                       ❌️️️                        |
-|             Notification stream             |        ✔️         |                              ❌                              |                       ❌️️️                        | 
-| <p>Post-capturing <p> interpolation scaling |        ✔️         |                            ❌️️️                             |                       ❌️️️                        |
-|          Out of Context capturing           |        ✔️         |                            ❌️️️️                            |                        ✔️                         | 
-|            Platform limitations             |        Web        |                              -                              |                       -️️️                        |  
+|                                             |     `Render`      | [screen_recorder](https://pub.dev/packages/screen_recorder) | [screenshot](https://pub.dev/packages/screenshot) |
+| :-----------------------------------------: | :---------------: | :---------------------------------------------------------: | :-----------------------------------------------: |
+|                Capture image                |        ✔️         |                             ❌                              |                        ✔️                         |
+|               Capture motion                |        ✔️         |                             ❌                              |                       ❌️️                        |
+|                Record motion                |        ✔️         |                             ✔️                              |                       ❌️️️                       |
+|                Format export                | Standard + custom |                        Only to bytes                        |                   Only to bytes                   |
+|                    Audio                    |        ✔️         |                             ❌                              |                       ❌️️️                       |
+|             Notification stream             |        ✔️         |                             ❌                              |                       ❌️️️                       |
+| <p>Post-capturing <p> interpolation scaling |        ✔️         |                            ❌️️️                            |                       ❌️️️                       |
+|          Out of Context capturing           |        ✔️         |                           ❌️️️️                            |                        ✔️                         |
+|            Platform limitations             |        Web        |                              -                              |                       -️️️                        |
 
-*Comparison is not ought to be biased, if you feel something is wrong please reach out on github*
+_Comparison is not ought to be biased, if you feel something is wrong please reach out on github_
 
 ## 🔧 Under the hood
 
@@ -463,8 +481,8 @@ classDiagram
 
 stateDiagram
     [*] --> Capturing
-    Capturing --> Handling 
-    Handling --> Capturing 
+    Capturing --> Handling
+    Handling --> Capturing
     Handling --> Processing
     Processing --> [*]
 ```
@@ -479,7 +497,7 @@ During capturing, handlers are asynchronously initiated to do conversion from a 
 and then write the file of eachframe in png format to a temporary directory.
 
 In the processing step, each frame is read from the temporary
-directory, to then be processed by [Ffmpeg](https://pub.dev/packages/ffmpeg_kit_flutter) (a tool for
+directory, to then be processed by [Ffmpeg](https://pub.dev/packages/ ffmpeg_kit_flutter_new) (a tool for
 video, audio and image processing), which then process each frame to the wanted output type.
 Scaling of frames, sound adaption is also handled here.
 
@@ -495,6 +513,7 @@ This package also takes advantage of FFmpeg plugin, which is **believed** to hav
 patented algorithms, but even themselves **"don't know it"**:
 
 Here is what FFmpeg says on its [website](https://ffmpeg.org/legal.html):
+
 > **Does FFmpeg use patented algorithms?** We do not know, we are not lawyers so we are not
 > qualified to answer this. Also we have never read patents to implement any part of FFmpeg, so even
 > if we were qualified we could not answer it as we do not know what is patented. Furthermore the
@@ -514,7 +533,7 @@ and possibly different sub-licences.
 
 ## 🚨 Known Issues
 
-* Platform views [cannot be rendered by flutter](https://github.com/flutter/flutter/issues/102866)
+- Platform views [cannot be rendered by flutter](https://github.com/flutter/flutter/issues/102866)
   itself (Platform views examples: Google Maps, Camera, etc.).
   There is an active [issue](https://github.com/polarby/render/issues/4) to find an alternative
   for `Render` plugin.
@@ -524,4 +543,3 @@ and possibly different sub-licences.
 Contributions are very welcome and can be merged within hours if testing is successful.
 Please note that this is an open source project and is not maintained by a company, but only
 volunteers.
-

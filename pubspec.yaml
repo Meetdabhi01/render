@@ -8,12 +8,8 @@ environment:
   flutter: ">=3.7.0-1.4.pre"
 
 dependencies:
-  # ffmpeg_kit_flutter: ^6.0.3
-  ffmpeg_kit_flutter:
-    git:
-      url: https://github.com/meetdabhioceanmtech/ffmpeg-kit.git
-      path: flutter/flutter
-      ref: 8058b0ce011a28fd3d29b0004f3184e20bff78b8
+  #   ffmpeg_kit_flutter_new: ^6.0.3
+  ffmpeg_kit_flutter_new: ^3.1.0
   provider: ^6.0.5
   flutter:
     sdk: flutter
